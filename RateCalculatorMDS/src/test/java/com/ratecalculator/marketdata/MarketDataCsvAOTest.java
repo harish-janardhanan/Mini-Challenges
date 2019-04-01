@@ -9,9 +9,11 @@ import java.util.List;
 
 public class MarketDataCsvAOTest {
 
+    private static final String CSV = "src/test/resources/MarketDataforExercise.csv";
+
     @Test
     public void testGetAllMethod(){
-        MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO("src/test/resources/MarketDataforExercise.csv");
+        MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO(CSV);
 
         List<MarketData> marketDataList = marketDataCsvAO.getAll();
 
@@ -21,7 +23,7 @@ public class MarketDataCsvAOTest {
 
     @Test
     public void testgetByLender(){
-        MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO("src/test/resources/MarketDataforExercise.csv");
+        MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO(CSV);
         MarketData marketData = marketDataCsvAO.get("Bob");
 
         Assert.assertEquals(marketData.getLendingRate(), Double.valueOf(0.075));

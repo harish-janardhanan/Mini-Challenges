@@ -49,7 +49,7 @@ final class CostOfFundCalculator implements ICalculator {
         BigDecimal totalLoanWeightFactor = perLoanWeightFactorList.stream()
                 .reduce(BigDecimal::add).get();
 
-        return totalLoanWeightFactor.divide(totalLoan,BigDecimal.ROUND_UP)
+        return totalLoanWeightFactor.divide(totalLoan,BigDecimal.ROUND_DOWN)
                 .multiply(new BigDecimal(100)).doubleValue();
     }
 

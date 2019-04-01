@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MarketDataCSVReaderTest {
 
-    MarketDataCSVReader marketDataCSVReader = new MarketDataCSVReader("src/test/resources/MarketDataforExercise.csv");
+    MarketDataCSVReader marketDataCSVReader = new MarketDataCSVReader("\"src/test/resources/MarketDataforExercise.csv\"");
 
     @Test
     public void testReadFile(){

@@ -17,6 +17,6 @@ final class AmountCalculator implements ICalculator {
     public BigDecimal calculateAmount(BigDecimal amount, Double rate) {
         Double rBynPlusOne = (rate / COMPOUNDING_TERM) + 1.0;
 
-        return amount.multiply(BigDecimal.valueOf(rBynPlusOne).pow(TERM));
+        return amount.multiply(BigDecimal.valueOf(rBynPlusOne).pow(TERM)).setScale(2,BigDecimal.ROUND_DOWN);
     }
 }
