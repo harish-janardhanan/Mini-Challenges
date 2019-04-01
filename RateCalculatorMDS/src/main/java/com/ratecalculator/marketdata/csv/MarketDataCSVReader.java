@@ -41,11 +41,11 @@ public class MarketDataCSVReader {
         }
         catch (FileNotFoundException f){
             log.error(MessageFormat.format("Market Data Source not available {0}", f.getMessage()));
-            throw new MarketDataReaderException(f.getMessage());
+            throw new MarketDataReaderException(f.getMessage(),f.getCause());
          }
         catch (IOException e) {
             log.error(MessageFormat.format("Error Parsing MarketDataFile {0}", e.getMessage()));
-            throw  new MarketDataReaderException(e.getMessage());
+            throw  new MarketDataReaderException(e.getMessage(),e.getCause());
         }
 
         return marketDataList;

@@ -7,18 +7,24 @@ import com.ratecalculator.core.LoanQuote;
 import com.ratecalculator.core.LoanQuoteCalculator;
 import com.ratecalculator.core.exception.RateCalculatorException;
 import com.ratecalculator.marketdata.exception.MarketDataReaderException;
+import org.apache.log4j.Logger;
 
 
 import java.math.BigDecimal;
 
 public class RateCalculatorClient {
 
+    private static final Logger log = Logger.getLogger(RateCalculatorClient.class);
+
     public static void main(String[] args) {
+
+        log.info(ClientUtils.getCurrentTimeStamp() + "Starting Application...");
         LoanQuote loanQuote;
         LoanQuoteCalculator loanQuoteCalculator = new LoanQuoteCalculator();
         try {
             ClientUtils.checkArguments(args);
         } catch (RateCalculatorClientException | RateCalculatorArgumentException r){
+            log.error("Incorrect parameters proviced to application:");
             ClientUtils.printQuoteNotFoundMessage(null,true);
             System.exit(0);
         }

@@ -5,10 +5,11 @@ import com.ratecalculator.core.LoanQuote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 
 
-public class ClientUtils {
+public final class ClientUtils {
 
     private ClientUtils(){}
     private static final Logger log = LoggerFactory.getLogger(ClientUtils.class);
@@ -45,8 +46,14 @@ public class ClientUtils {
     public static void printMessage(LoanQuote loanQuote) {
         System.out.println(MessageFormat.format("Requested Amount:{0}",loanQuote.getLoanAmount()));
         System.out.println(MessageFormat.format("Rate:{0}",loanQuote.getRateOfInterest()));
-        System.out.println(MessageFormat.format("Monthly Repayment:{0}",loanQuote.getMonthlyPayment()));
-        System.out.println(MessageFormat.format("Total Repayment:{0}",loanQuote.getFinalPayment()));
+        System.out.println(MessageFormat.format("Monthly Repayment:{0}",
+                loanQuote.getMonthlyPayment().setScale(2, BigDecimal.ROUND_DOWN)));
+        System.out.println(MessageFormat.format("Total Repayment:{0}",
+                loanQuote.getFinalPayment().setScale(2,BigDecimal.ROUND_DOWN)));
+    }
+
+    public static long getCurrentTimeStamp(){
+        return System.currentTimeMillis();
     }
 
     public static void usage(){

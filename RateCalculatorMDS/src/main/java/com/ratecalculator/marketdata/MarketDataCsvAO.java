@@ -14,9 +14,10 @@ public class MarketDataCsvAO implements MdaoApi<MarketData> {
 
     @Override
     public List<MarketData> getAll() {
-        MarketDataCSVReader marketDataCSVReader = new MarketDataCSVReader(csvPath);
-        return marketDataCSVReader.getMarketDataFromCsv();
-    }
+
+            MarketDataCSVReader marketDataCSVReader = new MarketDataCSVReader(csvPath);
+            return marketDataCSVReader.getMarketDataFromCsv();
+        }
 
     @Override
     public MarketData get(String lenderName) {
