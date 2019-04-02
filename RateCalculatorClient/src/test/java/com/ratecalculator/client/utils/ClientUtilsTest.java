@@ -69,10 +69,10 @@ public class ClientUtilsTest {
         LoanQuote loanQuote = loanQuoteCalculator.calculate(amount, CSV);
         ClientUtils.printMessage(loanQuote);
 
-        Assert.assertTrue(outContent.toString().contains("Requested Amount:1,000"));
-        Assert.assertTrue(outContent.toString().contains("Rate:7"));
-        Assert.assertTrue(outContent.toString().contains("Monthly Repayment:34.24"));
-        Assert.assertTrue(outContent.toString().contains("Total Repayment:1,232.92"));
+        Assert.assertTrue(outContent.toString().contains("Requested Amount:£1000.00"));
+        Assert.assertTrue(outContent.toString().contains("Rate:7.0%"));
+        Assert.assertTrue(outContent.toString().contains("Monthly Repayment:£34.24"));
+        Assert.assertTrue(outContent.toString().contains("Total Repayment:£1232.92"));
     }
 
 }
