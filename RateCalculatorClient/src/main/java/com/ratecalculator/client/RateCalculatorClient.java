@@ -5,6 +5,7 @@ import com.ratecalculator.client.utils.ClientUtils;
 import com.ratecalculator.core.LoanQuote;
 import com.ratecalculator.core.LoanQuoteCalculator;
 import com.ratecalculator.core.exception.InsufficientFundException;
+import com.ratecalculator.core.exception.RateCalculatorException;
 import com.ratecalculator.marketdata.exception.MarketDataFileCorruptedException;
 import com.ratecalculator.marketdata.exception.MarketDataReaderException;
 import org.apache.log4j.Logger;
@@ -50,6 +51,10 @@ public class RateCalculatorClient {
                 log.error("Insufficient funds in the Market....");
                 log.error(e.getMessage(),e.getCause());
                 ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), false);
+            }catch (RateCalculatorException r){
+                log.error("Unsupported operation");
+                log.error(r.getMessage(),r.getCause());
+                ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), true);
             }
         }
 

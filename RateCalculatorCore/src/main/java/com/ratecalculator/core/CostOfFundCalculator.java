@@ -1,6 +1,7 @@
 package com.ratecalculator.core;
 
 import com.ratecalculator.core.exception.InsufficientFundException;
+import com.ratecalculator.core.exception.RateCalculatorException;
 import com.ratecalculator.marketdata.MarketData;
 import com.ratecalculator.marketdata.MarketDataCsvAO;
 
@@ -55,6 +56,6 @@ final class CostOfFundCalculator implements ICalculator {
 
     @Override
     public BigDecimal calculateAmount(BigDecimal amount, Double rate) {
-        throw new InsufficientFundException("Operation Not Supported");
+        throw new RateCalculatorException("Operation Not Supported", new Throwable("Calculate Amount method not supported for COF Calculator"));
     }
 }

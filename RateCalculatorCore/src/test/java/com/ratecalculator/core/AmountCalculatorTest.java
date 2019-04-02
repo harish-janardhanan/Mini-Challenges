@@ -1,6 +1,7 @@
 package com.ratecalculator.core;
 
 import com.ratecalculator.core.exception.InsufficientFundException;
+import com.ratecalculator.core.exception.RateCalculatorException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class AmountCalculatorTest {
         Assert.assertEquals(BigDecimal.valueOf(1214.67),amountCalculator.calculateAmount(amount,rate));
     }
 
-    @Test(expected = InsufficientFundException.class)
+    @Test(expected = RateCalculatorException.class)
     public void testExceptionThrownWhenUnsupportedOperation(){
         AmountCalculator amountCalculator = new AmountCalculator();
 

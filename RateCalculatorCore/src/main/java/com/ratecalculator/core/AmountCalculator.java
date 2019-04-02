@@ -1,6 +1,6 @@
 package com.ratecalculator.core;
 
-import com.ratecalculator.core.exception.InsufficientFundException;
+import com.ratecalculator.core.exception.RateCalculatorException;
 
 import java.math.BigDecimal;
 
@@ -10,7 +10,7 @@ final class AmountCalculator implements ICalculator {
     private static final Double COMPOUNDING_TERM = 12.0;
     @Override
     public Double calculate(BigDecimal amount) {
-        throw new InsufficientFundException("Unsupported Operation");
+        throw new RateCalculatorException("Unsupported Operation",new Throwable("Calculate method not supported for Amount Calculator"));
     }
 
     @Override
