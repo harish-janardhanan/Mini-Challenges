@@ -1,6 +1,6 @@
 package com.ratecalculator.core;
 
-import com.ratecalculator.core.exception.RateCalculatorException;
+import com.ratecalculator.core.exception.InsufficientFundException;
 import com.ratecalculator.marketdata.MarketData;
 import com.ratecalculator.marketdata.MarketDataCsvAO;
 
@@ -39,7 +39,7 @@ final class CostOfFundCalculator implements ICalculator {
         }
 
         if(amount.compareTo(BigDecimal.valueOf(0.0)) != 0){
-            throw new RateCalculatorException("Insufficient funds in the market");
+            throw new InsufficientFundException("Insufficient funds in the market");
         }
 
         List<BigDecimal> perLoanWeightFactorList = loanAmountList.stream()
@@ -55,6 +55,6 @@ final class CostOfFundCalculator implements ICalculator {
 
     @Override
     public BigDecimal calculateAmount(BigDecimal amount, Double rate) {
-        throw new RateCalculatorException("Operation Not Supported");
+        throw new InsufficientFundException("Operation Not Supported");
     }
 }

@@ -1,6 +1,6 @@
 package com.ratecalculator.core;
 
-import com.ratecalculator.core.exception.RateCalculatorException;
+import com.ratecalculator.core.exception.InsufficientFundException;
 import com.ratecalculator.marketdata.exception.MarketDataReaderException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class CostOfFundCalculatorTest {
         Assert.assertEquals(Double.valueOf(7.05),costOfFundCalculator.calculate(amount));
     }
 
-    @Test(expected = RateCalculatorException.class)
+    @Test(expected = InsufficientFundException.class)
     public void testExceptionWhenNoFunds(){
         CostOfFundCalculator costOfFundCalculator = new CostOfFundCalculator(CSV);
 
@@ -28,7 +28,7 @@ public class CostOfFundCalculatorTest {
         costOfFundCalculator.calculate(amount);
     }
 
-    @Test(expected = RateCalculatorException.class)
+    @Test(expected = InsufficientFundException.class)
     public void testExceptionWhenUnsupported(){
         CostOfFundCalculator costOfFundCalculator = new CostOfFundCalculator(CSV);
 

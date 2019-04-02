@@ -21,14 +21,21 @@ public final class ClientUtils {
         }
 
         try {
-            Double.parseDouble(args[1]);
+            BigDecimal requestAmount = BigDecimal.valueOf(Double.parseDouble(args[1]));
+            if(requestAmount.compareTo(BigDecimal.valueOf(1000)) < 0 ||
+                    requestAmount.compareTo(BigDecimal.valueOf(15000)) > 0 ||
+                    requestAmount.doubleValue() % 100 != 0) {
+                log.error("Requested amount out of range: {}", requestAmount);
+                throw new RateCalculatorArgumentException("Requested amount out of range");
+            }
+
         }catch (NumberFormatException n){
             log.error("Incorrect amount specified {}", args[1]);
-            log.error(n.getMessage());
+            log.error(n.getMessage(),n.getCause());
             throw new RateCalculatorArgumentException("Incorrect Amount Specified");
         }catch (ArrayIndexOutOfBoundsException a){
             log.error("No argument specified {}", args[1]);
-            log.error(a.getMessage());
+            log.error(a.getMessage(),a.getCause());
             throw new RateCalculatorArgumentException("Incorrect Amount Specified");
         }
 
@@ -44,8 +51,10 @@ public final class ClientUtils {
     }
 
     public static void printMessage(LoanQuote loanQuote) {
-        System.out.println(MessageFormat.format("Requested Amount:{0}",loanQuote.getLoanAmount()));
-        System.out.println(MessageFormat.format("Rate:{0}",loanQuote.getRateOfInterest()));
+        System.out.println(MessageFormat.format("Requested Amount:{0}",
+                loanQuote.getLoanAmount()));
+            System.out.println(MessageFormat.format("Rate:{0}",
+                    BigDecimal.valueOf(loanQuote.getRateOfInterest()).setScale(1,BigDecimal.ROUND_DOWN)));
         System.out.println(MessageFormat.format("Monthly Repayment:{0}",
                 loanQuote.getMonthlyPayment().setScale(2, BigDecimal.ROUND_DOWN)));
         System.out.println(MessageFormat.format("Total Repayment:{0}",
