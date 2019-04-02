@@ -1,5 +1,6 @@
 package com.ratecalculator.client.utils;
 
+import com.ratecalculator.client.exception.FundOutOfRangeException;
 import com.ratecalculator.client.exception.InCorrectArgumentsFoundException;
 import com.ratecalculator.client.exception.RateCalculatorArgumentException;
 import com.ratecalculator.core.LoanQuote;
@@ -30,7 +31,8 @@ public final class ClientUtils {
                     requestAmount.compareTo(BigDecimal.valueOf(15000)) > 0 ||
                     requestAmount.doubleValue() % 100 != 0) {
                 log.error("Requested amount out of range: {}", requestAmount);
-                throw new RateCalculatorArgumentException("Requested amount out of range");
+                throw new FundOutOfRangeException("Requested amount out of range",
+                        new Throwable("Amount Not Available for quote"));
             }
 
         } catch (NumberFormatException n) {

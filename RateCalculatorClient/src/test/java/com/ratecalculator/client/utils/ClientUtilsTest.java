@@ -1,5 +1,6 @@
 package com.ratecalculator.client.utils;
 
+import com.ratecalculator.client.exception.FundOutOfRangeException;
 import com.ratecalculator.client.exception.InCorrectArgumentsFoundException;
 import com.ratecalculator.client.exception.RateCalculatorArgumentException;
 import com.ratecalculator.core.LoanQuote;
@@ -35,21 +36,21 @@ public class ClientUtilsTest {
         ClientUtils.checkArguments(args);
     }
 
-    @Test(expected = RateCalculatorArgumentException.class)
+    @Test(expected = FundOutOfRangeException.class)
     public void testAmountMoreThan15000() {
-        String[] args = {"25000", "csv"};
+        String[] args = {"csv", "25000"};
         ClientUtils.checkArguments(args);
     }
 
-    @Test(expected = RateCalculatorArgumentException.class)
+    @Test(expected = FundOutOfRangeException.class)
     public void testAmountLessThan1000() {
-        String[] args = {"300", "csv"};
+        String[] args = {"csv", "300"};
         ClientUtils.checkArguments(args);
     }
 
-    @Test(expected = RateCalculatorArgumentException.class)
+    @Test(expected = FundOutOfRangeException.class)
     public void testAmountNotIncrementOf100() {
-        String[] args = {"1350", "csv"};
+        String[] args = {"csv", "1350"};
         ClientUtils.checkArguments(args);
     }
 

@@ -1,5 +1,6 @@
 package com.ratecalculator.client;
 
+import com.ratecalculator.client.exception.FundOutOfRangeException;
 import com.ratecalculator.client.exception.InCorrectArgumentsFoundException;
 import com.ratecalculator.client.exception.RateCalculatorArgumentException;
 import com.ratecalculator.client.utils.ClientUtils;
@@ -26,11 +27,16 @@ public class RateCalculatorClient {
         try {
             ClientUtils.checkArguments(args);
         } catch (RateCalculatorArgumentException r) {
-            log.error("Incorrect parameters proviced to application {} " , args.length);
+            log.error("Incorrect parameters provided to application {} ", args.length);
             log.error(r.getMessage(), r.getCause());
             ClientUtils.printQuoteNotFoundMessage(args[1], true);
             exceptionHappened = true;
-        } catch (InCorrectArgumentsFoundException n){
+        } catch (FundOutOfRangeException f) {
+            log.error("The current ask for {} is invalid...", args[1]);
+            log.error(f.getMessage(), f.getCause());
+            ClientUtils.printQuoteNotFoundMessage(args[1], false);
+            exceptionHappened = true;
+        } catch (InCorrectArgumentsFoundException n) {
             log.error("No Arguments passed - No Of Arguments is : {} " , args.length);
             log.error(n.getMessage(), n.getCause());
             ClientUtils.printQuoteNotFoundMessage("NA", true);
