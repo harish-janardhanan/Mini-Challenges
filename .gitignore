@@ -9,6 +9,7 @@ workspace.xml
 
 # Log file
 *.log
+*.out
 
 # BlueJ files
 *.ctxt
