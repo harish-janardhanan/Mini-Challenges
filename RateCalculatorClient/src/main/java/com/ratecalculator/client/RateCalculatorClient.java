@@ -1,14 +1,14 @@
 package com.ratecalculator.client;
 
 import com.ratecalculator.client.exception.RateCalculatorArgumentException;
-import com.ratecalculator.client.exception.RateCalculatorClientException;
 import com.ratecalculator.client.utils.ClientUtils;
 import com.ratecalculator.core.LoanQuote;
 import com.ratecalculator.core.LoanQuoteCalculator;
+import com.ratecalculator.core.exception.InsufficientFundException;
 import com.ratecalculator.core.exception.RateCalculatorException;
+import com.ratecalculator.marketdata.exception.MarketDataFileCorruptedException;
 import com.ratecalculator.marketdata.exception.MarketDataReaderException;
 import org.apache.log4j.Logger;
-
 
 import java.math.BigDecimal;
 
@@ -18,31 +18,43 @@ public class RateCalculatorClient {
 
     public static void main(String[] args) {
 
-        log.info(ClientUtils.getCurrentTimeStamp() + "Starting Application...");
+        boolean exceptionHappened = false;
         LoanQuote loanQuote;
         LoanQuoteCalculator loanQuoteCalculator = new LoanQuoteCalculator();
         try {
             ClientUtils.checkArguments(args);
-        } catch (RateCalculatorClientException | RateCalculatorArgumentException r){
+        } catch (RateCalculatorArgumentException r) {
             log.error("Incorrect parameters proviced to application:");
-            ClientUtils.printQuoteNotFoundMessage(null,true);
-            System.exit(0);
+            log.error(r.getMessage(), r.getCause());
+            ClientUtils.printQuoteNotFoundMessage(null, true);
+            exceptionHappened = true;
         }
 
-        BigDecimal requestAmount = BigDecimal.valueOf(Double.parseDouble(args[1]));
-        String csv = args[0];
+        if (!exceptionHappened) {
+            BigDecimal requestAmount = BigDecimal.valueOf(Double.parseDouble(args[1]));
+            String csv = args[0];
 
-        try {
-            loanQuote = loanQuoteCalculator.calculate(requestAmount,csv);
-            ClientUtils.printMessage(loanQuote);
-        }catch (MarketDataReaderException | RateCalculatorArgumentException  m) {
-            ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(),true);
-            System.exit(0);
-        }catch (RateCalculatorException e){
-            ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(),false);
-            System.exit(0);
+            try {
+                loanQuote = loanQuoteCalculator.calculate(requestAmount, csv);
+                ClientUtils.printMessage(loanQuote);
+            } catch (MarketDataReaderException m) {
+                log.error("MarketData File not found...");
+                log.error(m.getMessage(), m.getCause());
+                ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), true);
+            } catch (MarketDataFileCorruptedException m) {
+                log.error("Corrupted Market Data File...");
+                log.error(m.getMessage(), m.getCause());
+                ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), true);
+            } catch (InsufficientFundException e) {
+                log.error("Insufficient funds in the Market....");
+                log.error(e.getMessage(), e.getCause());
+                ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), false);
+            } catch (RateCalculatorException r) {
+                log.error("Unsupported operation");
+                log.error(r.getMessage(), r.getCause());
+                ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), true);
+            }
         }
-
 
     }
 }

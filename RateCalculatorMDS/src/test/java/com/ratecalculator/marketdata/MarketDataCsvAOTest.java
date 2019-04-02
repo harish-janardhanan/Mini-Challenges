@@ -9,19 +9,21 @@ import java.util.List;
 
 public class MarketDataCsvAOTest {
 
+    private static final String CSV = "src/test/resources/MarketDataforExercise.csv";
+
     @Test
-    public void testGetAllMethod(){
-        MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO("src/test/resources/MarketDataforExercise.csv");
+    public void testGetAllMethod() {
+        MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO(CSV);
 
         List<MarketData> marketDataList = marketDataCsvAO.getAll();
 
         Assert.assertNotNull(marketDataList);
-        Assert.assertEquals(marketDataList.size(),7);
+        Assert.assertEquals(marketDataList.size(), 7);
     }
 
     @Test
-    public void testgetByLender(){
-        MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO("src/test/resources/MarketDataforExercise.csv");
+    public void testgetByLender() {
+        MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO(CSV);
         MarketData marketData = marketDataCsvAO.get("Bob");
 
         Assert.assertEquals(marketData.getLendingRate(), Double.valueOf(0.075));
@@ -29,7 +31,7 @@ public class MarketDataCsvAOTest {
     }
 
     @Test(expected = MarketDataReaderException.class)
-    public void testExceptionWhenFileNotFound(){
+    public void testExceptionWhenFileNotFound() {
         MarketDataCsvAO marketDataCsvAO = new MarketDataCsvAO("WRONGFILE");
         marketDataCsvAO.getAll();
     }

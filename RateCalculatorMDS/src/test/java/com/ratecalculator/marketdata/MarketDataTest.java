@@ -10,19 +10,19 @@ public class MarketDataTest {
 
 
     @Test
-    public void testSetters(){
+    public void testSetters() {
         MarketData marketData = new MarketData();
         marketData.setAvailableFunds(BigDecimal.valueOf(12.0));
         marketData.setLenderName("RichLender");
         marketData.setLendingRate(0.123);
 
         Assert.assertEquals(marketData.getAvailableFunds(), BigDecimal.valueOf(12.0));
-        Assert.assertEquals(marketData.getLenderName(),"RichLender");
-        Assert.assertEquals(marketData.getLendingRate(),Double.valueOf(0.123));
+        Assert.assertEquals(marketData.getLenderName(), "RichLender");
+        Assert.assertEquals(marketData.getLendingRate(), Double.valueOf(0.123));
     }
 
     @Test
-    public void testHashCode(){
+    public void testHashCode() {
         MarketData marketData = new MarketData();
         marketData.setAvailableFunds(BigDecimal.valueOf(12.0));
         marketData.setLenderName("RichLender");
@@ -32,7 +32,7 @@ public class MarketDataTest {
     }
 
     @Test
-    public void testEquals(){
+    public void testEquals() {
         MarketData marketData = new MarketData();
         MarketData marketData1 = new MarketData();
 
@@ -50,7 +50,7 @@ public class MarketDataTest {
     }
 
     @Test
-    public void testCompareTo(){
+    public void testCompareTo() {
         MarketData marketData = new MarketData();
         MarketData marketData1 = new MarketData();
         MarketData marketData2 = new MarketData();
@@ -73,20 +73,20 @@ public class MarketDataTest {
         marketData3.setLenderName("RichLender");
         marketData3.setLendingRate(0.01);
 
-        Assert.assertEquals(marketData.compareTo(marketData1),0);
+        Assert.assertEquals(marketData.compareTo(marketData1), 0);
         Assert.assertEquals(marketData.compareTo(marketData2), -1);
         Assert.assertEquals(marketData.compareTo(marketData3), 1);
     }
 
     @Test
-    public void testToString(){
+    public void testToString() {
         MarketData marketData = new MarketData();
 
         marketData.setAvailableFunds(BigDecimal.valueOf(12.0));
         marketData.setLenderName("RichLender");
         marketData.setLendingRate(0.123);
 
-        Assert.assertEquals(marketData.toString(),"MarketData{" +
+        Assert.assertEquals(marketData.toString(), "MarketData{" +
                 "lenderName='" + "RichLender" + '\'' +
                 ", lendingRate=" + 0.123 +
                 ", availableFunds=" + 12.0 +
