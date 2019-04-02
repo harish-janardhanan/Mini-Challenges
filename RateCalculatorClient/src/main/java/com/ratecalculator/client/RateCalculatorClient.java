@@ -26,7 +26,7 @@ public class RateCalculatorClient {
         try {
             ClientUtils.checkArguments(args);
         } catch (RateCalculatorArgumentException r) {
-            log.error("Incorrect parameters proviced to application {} " , args.length);
+            log.error("Incorrect parameters provided to application {} ", args.length);
             log.error(r.getMessage(), r.getCause());
             ClientUtils.printQuoteNotFoundMessage(args[1], true);
             exceptionHappened = true;
