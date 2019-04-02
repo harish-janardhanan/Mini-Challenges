@@ -30,4 +30,14 @@ public final class LoanQuote {
     public Double getRateOfInterest() {
         return rateOfInterest;
     }
+
+    @Override
+    public String toString() {
+        return "LoanQuote{" +
+                "loanAmount=" + loanAmount +
+                ", monthlyPayment=" + monthlyPayment +
+                ", finalPayment=" + finalPayment +
+                ", rateOfInterest=" + rateOfInterest +
+                '}';
+    }
 }
