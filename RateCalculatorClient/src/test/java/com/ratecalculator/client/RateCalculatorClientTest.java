@@ -19,6 +19,12 @@ public class RateCalculatorClientTest {
         Assert.assertTrue(outContent.toString().contains("Tip: Have checked your input parameters?"));
     }
 
+    private static void testMainForNoQuoteWithoutTip(String[] args, ByteArrayOutputStream outContent) {
+        RateCalculatorClient.main(args);
+        Assert.assertTrue(outContent.toString().contains(" is not available at the moment"));
+        Assert.assertFalse(outContent.toString().contains("Tip: Have checked your input parameters?"));
+    }
+
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
@@ -51,21 +57,19 @@ public class RateCalculatorClientTest {
     @Test
     public void testAmountLessthan1000() {
         String[] args = {CSV, "100"};
-        testMainForNoQuote(args, outContent);
+        testMainForNoQuoteWithoutTip(args, outContent);
     }
 
     @Test
     public void testAmoountGreaterThan15000() {
         String[] args = {CSV, "100000000000000"};
-        testMainForNoQuote(args, outContent);
+        testMainForNoQuoteWithoutTip(args, outContent);
     }
 
     @Test
     public void testInsufficientFunds() {
         String[] args = {CSV, "3500"};
-        RateCalculatorClient.main(args);
-        Assert.assertTrue(outContent.toString().contains(" is not available at the moment"));
-        Assert.assertFalse(outContent.toString().contains("Tip: Have checked your input parameters?"));
+        testMainForNoQuoteWithoutTip(args, outContent);
     }
 
     @Test
