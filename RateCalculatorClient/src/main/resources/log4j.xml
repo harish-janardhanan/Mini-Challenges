@@ -40,6 +40,15 @@
         <level value="INFO"/>
         <appender-ref ref="FILE"/>
     </logger>
+    <logger name="com.ratecalculator.marketdata.MarketDataCsvAO">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.ratecalculator.marketdata.csv.MarketDataCSVReader">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
 
     <logger name="log4j.rootLogger" additivity="false">
         <level value="INFO"/>
