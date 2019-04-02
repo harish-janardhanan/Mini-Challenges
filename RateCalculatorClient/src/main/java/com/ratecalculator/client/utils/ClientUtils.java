@@ -1,6 +1,6 @@
 package com.ratecalculator.client.utils;
 
-import com.ratecalculator.client.exception.NoArgumentsFoundException;
+import com.ratecalculator.client.exception.InCorrectArgumentsFoundException;
 import com.ratecalculator.client.exception.RateCalculatorArgumentException;
 import com.ratecalculator.core.LoanQuote;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ public final class ClientUtils {
         log.debug("Arguments checker with values {}" ,args);
         if (args.length == 0 || args.length > 2) {
             log.error("Incorrect Number of Arguments passed in the program {}", args.length);
-            throw new NoArgumentsFoundException("Incorrect Number of Arguments", new Throwable("No Arguments entered"));
+            throw new InCorrectArgumentsFoundException("Incorrect Number of Arguments", new Throwable("Incorrect Arguments entered"));
         }
 
         try {

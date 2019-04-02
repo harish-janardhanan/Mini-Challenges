@@ -1,5 +1,6 @@
 package com.ratecalculator.client.utils;
 
+import com.ratecalculator.client.exception.InCorrectArgumentsFoundException;
 import com.ratecalculator.client.exception.RateCalculatorArgumentException;
 import com.ratecalculator.core.LoanQuote;
 import com.ratecalculator.core.LoanQuoteCalculator;
@@ -28,7 +29,7 @@ public class ClientUtilsTest {
         System.setOut(originalOut);
     }
 
-    @Test(expected = RateCalculatorArgumentException.class)
+    @Test(expected = InCorrectArgumentsFoundException.class)
     public void testNoArguments() {
         String[] args = {};
         ClientUtils.checkArguments(args);

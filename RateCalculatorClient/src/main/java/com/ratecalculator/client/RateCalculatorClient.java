@@ -1,6 +1,6 @@
 package com.ratecalculator.client;
 
-import com.ratecalculator.client.exception.NoArgumentsFoundException;
+import com.ratecalculator.client.exception.InCorrectArgumentsFoundException;
 import com.ratecalculator.client.exception.RateCalculatorArgumentException;
 import com.ratecalculator.client.utils.ClientUtils;
 import com.ratecalculator.core.LoanQuote;
@@ -30,7 +30,7 @@ public class RateCalculatorClient {
             log.error(r.getMessage(), r.getCause());
             ClientUtils.printQuoteNotFoundMessage(args[1], true);
             exceptionHappened = true;
-        } catch (NoArgumentsFoundException n){
+        } catch (InCorrectArgumentsFoundException n){
             log.error("No Arguments passed - No Of Arguments is : {} " , args.length);
             log.error(n.getMessage(), n.getCause());
             ClientUtils.printQuoteNotFoundMessage("NA", true);
