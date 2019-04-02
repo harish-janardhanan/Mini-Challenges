@@ -10,7 +10,6 @@ import com.ratecalculator.marketdata.exception.MarketDataFileCorruptedException;
 import com.ratecalculator.marketdata.exception.MarketDataReaderException;
 import org.apache.log4j.Logger;
 
-
 import java.math.BigDecimal;
 
 public class RateCalculatorClient {
@@ -19,16 +18,15 @@ public class RateCalculatorClient {
 
     public static void main(String[] args) {
 
-        log.info(ClientUtils.getCurrentTimeStamp() + "Starting Application...");
         boolean exceptionHappened = false;
         LoanQuote loanQuote;
         LoanQuoteCalculator loanQuoteCalculator = new LoanQuoteCalculator();
         try {
             ClientUtils.checkArguments(args);
-        } catch ( RateCalculatorArgumentException r){
+        } catch (RateCalculatorArgumentException r) {
             log.error("Incorrect parameters proviced to application:");
-            log.error(r.getMessage(),r.getCause());
-            ClientUtils.printQuoteNotFoundMessage(null,true);
+            log.error(r.getMessage(), r.getCause());
+            ClientUtils.printQuoteNotFoundMessage(null, true);
             exceptionHappened = true;
         }
 
@@ -39,21 +37,21 @@ public class RateCalculatorClient {
             try {
                 loanQuote = loanQuoteCalculator.calculate(requestAmount, csv);
                 ClientUtils.printMessage(loanQuote);
-            }catch (MarketDataReaderException  m) {
+            } catch (MarketDataReaderException m) {
                 log.error("MarketData File not found...");
-                log.error(m.getMessage(),m.getCause());
+                log.error(m.getMessage(), m.getCause());
                 ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), true);
-            }catch (MarketDataFileCorruptedException m){
+            } catch (MarketDataFileCorruptedException m) {
                 log.error("Corrupted Market Data File...");
-                log.error(m.getMessage(),m.getCause());
+                log.error(m.getMessage(), m.getCause());
                 ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), true);
-            }catch (InsufficientFundException e) {
+            } catch (InsufficientFundException e) {
                 log.error("Insufficient funds in the Market....");
-                log.error(e.getMessage(),e.getCause());
+                log.error(e.getMessage(), e.getCause());
                 ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), false);
-            }catch (RateCalculatorException r){
+            } catch (RateCalculatorException r) {
                 log.error("Unsupported operation");
-                log.error(r.getMessage(),r.getCause());
+                log.error(r.getMessage(), r.getCause());
                 ClientUtils.printQuoteNotFoundMessage(requestAmount.toString(), true);
             }
         }

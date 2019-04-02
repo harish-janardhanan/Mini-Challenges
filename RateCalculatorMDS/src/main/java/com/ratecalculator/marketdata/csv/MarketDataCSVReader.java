@@ -30,7 +30,7 @@ public class MarketDataCSVReader {
 
     public List<MarketData> getMarketDataFromCsv() {
         List<MarketData> marketDataList = new ArrayList<>();
-        try ( Reader csvReader = new FileReader(csvPath);){
+        try (Reader csvReader = new FileReader(csvPath);) {
 
             Iterable<CSVRecord> records;
             records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(csvReader);

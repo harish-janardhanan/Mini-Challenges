@@ -13,16 +13,16 @@ public class CostOfFundCalculatorTest {
     private static final String CSV = "src/test/resources/MarketDataforExercise.csv";
 
     @Test
-    public void testCostOfFundCalculator(){
+    public void testCostOfFundCalculator() {
         CostOfFundCalculator costOfFundCalculator = new CostOfFundCalculator(CSV);
 
         BigDecimal amount = BigDecimal.valueOf(1200.00);
 
-        Assert.assertEquals(Double.valueOf(7.05),costOfFundCalculator.calculate(amount));
+        Assert.assertEquals(Double.valueOf(7.05), costOfFundCalculator.calculate(amount));
     }
 
     @Test(expected = InsufficientFundException.class)
-    public void testExceptionWhenNoFunds(){
+    public void testExceptionWhenNoFunds() {
         CostOfFundCalculator costOfFundCalculator = new CostOfFundCalculator(CSV);
 
         BigDecimal amount = BigDecimal.valueOf(20000.00);
@@ -30,7 +30,7 @@ public class CostOfFundCalculatorTest {
     }
 
     @Test(expected = RateCalculatorException.class)
-    public void testExceptionWhenUnsupported(){
+    public void testExceptionWhenUnsupported() {
         CostOfFundCalculator costOfFundCalculator = new CostOfFundCalculator(CSV);
 
         costOfFundCalculator.calculateAmount(new BigDecimal(0), 0.0);
@@ -38,7 +38,7 @@ public class CostOfFundCalculatorTest {
     }
 
     @Test(expected = MarketDataReaderException.class)
-    public void testExceptionWhenNoFile(){
+    public void testExceptionWhenNoFile() {
         CostOfFundCalculator costOfFundCalculator = new CostOfFundCalculator("wrongfile");
         costOfFundCalculator.calculate(BigDecimal.valueOf(200));
     }

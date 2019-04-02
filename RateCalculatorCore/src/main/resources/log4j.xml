@@ -3,8 +3,8 @@
 <log4j:configuration>
 
     <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="application.log" />
-        <param name="DatePattern" value=".yyyy-MM-dd" />
+        <param name="File" value="application.log"/>
+        <param name="DatePattern" value=".yyyy-MM-dd"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
                    value="%d{yyyy-MMM-dd HH:mm:ss,SSS} [%t] %c %x%n  %-5p %m%n"/>

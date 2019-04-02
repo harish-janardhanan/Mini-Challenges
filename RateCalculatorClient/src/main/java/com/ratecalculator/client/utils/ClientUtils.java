@@ -11,37 +11,39 @@ import java.text.MessageFormat;
 
 public final class ClientUtils {
 
-    private ClientUtils(){}
     private static final Logger log = LoggerFactory.getLogger(ClientUtils.class);
 
-    public static void checkArguments(String[] args){
-        if (args.length == 0 || args.length > 2){
+    private ClientUtils() {
+    }
+
+    public static void checkArguments(String[] args) {
+        if (args.length == 0 || args.length > 2) {
             log.error("Incorrect Number of Arguments passed in the program {}", args.length);
-            throw  new RateCalculatorArgumentException("Incorrect Number of Arguments");
+            throw new RateCalculatorArgumentException("Incorrect Number of Arguments");
         }
 
         try {
             BigDecimal requestAmount = BigDecimal.valueOf(Double.parseDouble(args[1]));
-            if(requestAmount.compareTo(BigDecimal.valueOf(1000)) < 0 ||
+            if (requestAmount.compareTo(BigDecimal.valueOf(1000)) < 0 ||
                     requestAmount.compareTo(BigDecimal.valueOf(15000)) > 0 ||
                     requestAmount.doubleValue() % 100 != 0) {
                 log.error("Requested amount out of range: {}", requestAmount);
                 throw new RateCalculatorArgumentException("Requested amount out of range");
             }
 
-        }catch (NumberFormatException n){
+        } catch (NumberFormatException n) {
             log.error("Incorrect amount specified {}", args[1]);
-            log.error(n.getMessage(),n.getCause());
+            log.error(n.getMessage(), n.getCause());
             throw new RateCalculatorArgumentException("Incorrect Amount Specified");
-        }catch (ArrayIndexOutOfBoundsException a){
+        } catch (ArrayIndexOutOfBoundsException a) {
             log.error("No argument specified {}", args[1]);
-            log.error(a.getMessage(),a.getCause());
+            log.error(a.getMessage(), a.getCause());
             throw new RateCalculatorArgumentException("Incorrect Amount Specified");
         }
 
     }
 
-    public static void printQuoteNotFoundMessage(String ask, boolean exception){
+    public static void printQuoteNotFoundMessage(String ask, boolean exception) {
         System.out.println(MessageFormat.format("Your quote for {0} is not available at the moment, please try later...", ask));
         if (exception) {
             System.out.println("Tip: Have checked your input parameters?  ");
@@ -53,19 +55,16 @@ public final class ClientUtils {
     public static void printMessage(LoanQuote loanQuote) {
         System.out.println(MessageFormat.format("Requested Amount:{0}",
                 loanQuote.getLoanAmount()));
-            System.out.println(MessageFormat.format("Rate:{0}",
-                    BigDecimal.valueOf(loanQuote.getRateOfInterest()).setScale(1,BigDecimal.ROUND_DOWN)));
+        System.out.println(MessageFormat.format("Rate:{0}",
+                BigDecimal.valueOf(loanQuote.getRateOfInterest()).setScale(1, BigDecimal.ROUND_DOWN)));
         System.out.println(MessageFormat.format("Monthly Repayment:{0}",
                 loanQuote.getMonthlyPayment().setScale(2, BigDecimal.ROUND_DOWN)));
         System.out.println(MessageFormat.format("Total Repayment:{0}",
-                loanQuote.getFinalPayment().setScale(2,BigDecimal.ROUND_DOWN)));
+                loanQuote.getFinalPayment().setScale(2, BigDecimal.ROUND_DOWN)));
     }
 
-    public static long getCurrentTimeStamp(){
-        return System.currentTimeMillis();
-    }
 
-    public static void usage(){
+    public static void usage() {
         System.out.println("[csvfile] ----------------------------- path to market data file");
         System.out.println("[amount]  -----------------------------     Required Loan amount");
     }

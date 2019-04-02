@@ -8,13 +8,13 @@ public class MarketData implements Comparable<MarketData> {
     private Double lendingRate;
     private BigDecimal availableFunds;
 
-    public MarketData(String lenderName, Double lendingRate, BigDecimal availableFunds){
+    public MarketData(String lenderName, Double lendingRate, BigDecimal availableFunds) {
         this.lenderName = lenderName;
         this.lendingRate = lendingRate;
         this.availableFunds = availableFunds;
     }
 
-    public MarketData(){
+    public MarketData() {
         //Default Constructor
     }
 

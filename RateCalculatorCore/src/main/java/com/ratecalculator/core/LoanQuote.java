@@ -8,7 +8,7 @@ public final class LoanQuote {
     private BigDecimal finalPayment;
     private Double rateOfInterest;
 
-    LoanQuote(BigDecimal loanAmount, BigDecimal monthlyPayment, BigDecimal finalPayment, Double rateOfInterest){
+    LoanQuote(BigDecimal loanAmount, BigDecimal monthlyPayment, BigDecimal finalPayment, Double rateOfInterest) {
         this.loanAmount = loanAmount;
         this.monthlyPayment = monthlyPayment;
         this.finalPayment = finalPayment;
