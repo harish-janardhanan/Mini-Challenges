@@ -19,7 +19,7 @@ public class RateCalculatorClient {
     private static final Logger log = LoggerFactory.getLogger(RateCalculatorClient.class);
 
     public static void main(String[] args) {
-        log.info("Starting Application with arguments, {}", args);
+        log.info("Starting Application ...");
         boolean exceptionHappened = false;
         LoanQuote loanQuote;
         LoanQuoteCalculator loanQuoteCalculator = new LoanQuoteCalculator();

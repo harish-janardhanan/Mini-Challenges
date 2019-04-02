@@ -55,13 +55,13 @@ public final class ClientUtils {
     }
 
     public static void printMessage(LoanQuote loanQuote) {
-        System.out.println(MessageFormat.format("Requested Amount:{0}",
+        System.out.println(String.format("Requested Amount:£%.2f",
                 loanQuote.getLoanAmount()));
-        System.out.println(MessageFormat.format("Rate:{0}",
+        System.out.println(String.format("Rate:%2k.1f%%",
                 BigDecimal.valueOf(loanQuote.getRateOfInterest()).setScale(1, BigDecimal.ROUND_DOWN)));
-        System.out.println(MessageFormat.format("Monthly Repayment:{0}",
+        System.out.println(String.format("Monthly Repayment:£%.2f",
                 loanQuote.getMonthlyPayment().setScale(2, BigDecimal.ROUND_DOWN)));
-        System.out.println(MessageFormat.format("Total Repayment:{0}",
+        System.out.println(String.format("Total Repayment:£%.2f",
                 loanQuote.getFinalPayment().setScale(2, BigDecimal.ROUND_DOWN)));
     }
 
