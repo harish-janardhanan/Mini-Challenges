@@ -3,13 +3,52 @@
 <log4j:configuration>
 
     <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="application.log"/>
+        <param name="File" value="logs/rateCalculatorClient.log"/>
         <param name="DatePattern" value=".yyyy-MM-dd"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
                    value="%d{yyyy-MMM-dd HH:mm:ss,SSS} [%t] %c %x%n  %-5p %m%n"/>
         </layout>
     </appender>
+
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="conversionPattern" value="%d [%t] %-5p %c - %m%n"/>
+        </layout>
+    </appender>
+
+    <logger name="com.ratecalculator.client.RateCalculatorClient">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.ratecalculator.client.utils.ClientUtils">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.ratecalculator.core.CostOfFundCalculator">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.ratecalculator.core.AmountCalculator">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="com.ratecalculator.core.LoanQuoteCalculator">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="com.ratecalculator.marketdata.MarketDataCsvAO">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.ratecalculator.marketdata.csv.MarketDataCSVReader">
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </logger>
 
     <logger name="log4j.rootLogger" additivity="false">
         <level value="INFO"/>
